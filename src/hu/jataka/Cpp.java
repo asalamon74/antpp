@@ -52,6 +52,13 @@ public final class Cpp extends Task {
             if( mFile.lastModified() < mFile2.lastModified() ) {
                 return;
             }
+            
+            if( mFile2.exists() ) {
+                // we have to delete because cpp may not be able 
+                // to modify it, because of the chmod command.
+                mFile2.delete();
+            }
+                
             System.out.println("Preprocessing "+mFile.getName());
             try {
                 String params = "-C -P ";
