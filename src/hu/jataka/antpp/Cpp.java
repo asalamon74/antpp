@@ -111,7 +111,7 @@ public final class Cpp extends Task {
                         }
                     } catch( IOException e ) {
                         // Only Warning
-                        log("Chmod unsuccessfull", Project.MSG_WARN);
+                        log("Chmod unsuccessful", Project.MSG_WARN);
                     }
                 }
             } catch( Exception e ) {

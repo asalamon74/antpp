@@ -1,4 +1,8 @@
-0.68.00
+0.69.00
+
+-Spelling error corrected
+
+0.68.00 2003-MAR-19
 
 -Using -imacros instead of -D (win compatibility)
 -VERSION file included in binary package
