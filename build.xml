@@ -2,12 +2,16 @@
 
         <property file=".ant.properties"/>
 
+        <!-- Using the following environmental variables -->
+        <!-- ANT_HOME -->
+        <property environment="env"/>
+
 	<target name="init">
 	    <mkdir dir="${classes}"/>
 	</target>
 	
 	<target name="compile" depends="init">
-	    <javac srcdir="src" destdir="${classes}" classpath="${ant.home}/lib/ant.jar"/>
+	    <javac srcdir="src" destdir="${classes}" classpath="${env.ANT_HOME}/lib/ant.jar"/>
 	</target>
 	
 	<target name="package" depends="compile">
@@ -32,7 +36,7 @@
 	</target>
 	
 	<target name="deploy" depends="package">
-	    <copy file="${project}-bin.jar" todir="${ant.home}/lib"/>
+	    <copy file="${project}-bin.jar" todir="${env.ANT_HOME}/lib"/>
 	</target>
 	
 	<target name="clean">
