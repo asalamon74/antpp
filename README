@@ -18,7 +18,8 @@ Cpp
 ===
 
 Calls the preprocessor for a specified file, or for all the *.x* files
-in a directory. 
+in a directory. It ignores files with the following patterns: *~, .#*,
+*.xml
 
 Parameters
 ----------

@@ -1,3 +1,7 @@
+0.70.00 2003-JUN-28
+
+-Ignore files starts with .#, ends with .xml
+
 0.69.00 2003-MAY-06
 
 -Spelling error corrected

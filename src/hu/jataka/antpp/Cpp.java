@@ -28,7 +28,9 @@ public final class Cpp extends Task {
     public static class XFilesFilter implements FileFilter {
         public boolean accept(File pathname) {
             return (pathname.isDirectory() || pathname.getName().indexOf(".x") != -1)
-                && !pathname.getName().endsWith("~");
+                && !pathname.getName().endsWith("~")
+                && !pathname.getName().startsWith(".#")
+                && !pathname.getName().endsWith(".xml");
         }
     }
 
