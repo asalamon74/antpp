@@ -1,0 +1,39 @@
+                                A N T P P
+                                =========
+
+This project adds preprocessing capability to java programs. Antpp does
+not implement a preprocessor, it calls the well-known cpp (C
+PreProcessor). Antpp is a collection of ant tasks.
+
+Usage
+=====
+
+It is necessary to define the tasks at the beginning of the build.xml
+file:
+
+<taskdef name="cpp"          classname="hu.jataka.antpp.Cpp"/>
+<taskdef name="cppdel"       classname="hu.jataka.antpp.CppDel"/>
+
+Cpp
+===
+
+Calls the preprocessor for a specified file, or for all the *.x* files
+in a directory. 
+
+Parameters
+----------
+
+file:   Name of the file to be preprocessed.
+dir:    Name of the directory, to search for files to be preprocessed.
+macros: List of macros to be passed to cpp.
+
+CppDel
+======
+
+Deletes the generated files (as a part of the clean process).
+
+Parameters
+----------
+
+dir:    Directory to search for generated files.
+
