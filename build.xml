@@ -1,8 +1,7 @@
 <project name="antpp" default="all" basedir=".">
 
-	<property name="ant.home" value="/usr/local/java/jakarta-ant-1.5"/>
-	<property name="classes" value="tmpclasses"/>
-	
+        <property file=".ant.properties"/>
+
 	<target name="init">
 	    <mkdir dir="${classes}"/>
 	</target>
@@ -12,32 +11,33 @@
 	</target>
 	
 	<target name="package" depends="compile">
-	    <jar jarfile="antpp-bin.jar">
+	    <jar jarfile="${project}-bin.jar">
 	        <fileset dir="${classes}">
 	            <include name="**/*.class"/>
 	        </fileset>
 	    </jar>
 	    
-	    <zip zipfile="antpp-src.zip">
+	    <zip zipfile="${project}-src.zip">
 	        <fileset dir=".">
 	            <include name="src/**/*.java"/>
 	            <include name="doc/**"/>
-	            <include name="samples/**"/>
 	            <include name="LICENSE"/>
 	            <include name="build.xml"/>
+	            <include name="Changelog"/>
+	            <include name="TODO"/>
 	        </fileset>
 	        
 	    </zip>
 	</target>
 	
 	<target name="deploy" depends="package">
-	    <copy file="antpp-bin.jar" todir="${ant.home}/lib"/>
+	    <copy file="${project}-bin.jar" todir="${ant.home}/lib"/>
 	</target>
 	
 	<target name="clean">
 	    <delete dir="${classes}" failonerror="false"/>
-	    <delete file="antpp-bin.jar" failonerror="false"/>
-	    <delete file="antpp-src.jar" failonerror="false"/>
+	    <delete file="${project}-bin.jar" failonerror="false"/>
+	    <delete file="${project}-src.zip" failonerror="false"/>
 	</target>
 
     <target name="all" depends="clean,deploy"/>
