@@ -1,3 +1,8 @@
+0.68.00
+
+-Using -imacros instead of -D (win compatibility)
+-VERSION file included in binary package
+
 0.67.00 2003-FEB-15
 
 -Eliminating .ant.properties

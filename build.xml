@@ -17,6 +17,7 @@
 	        <fileset dir="classes">
 	            <include name="**/*.class"/>
 	        </fileset>
+                <fileset dir="." includes="VERSION" />
 	    </jar>
 	    
 	    <zip zipfile="${ant.project.name}-src.zip">
