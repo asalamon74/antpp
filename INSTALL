@@ -1,0 +1,10 @@
+                                A N T P P
+                                =========
+
+If you don't want to compile the project, just copy the 
+antpp-bin.jar file to the lib directory of Ant.
+
+If you want to compile, set ANT_HOME environmental variable
+to the directory of Ant. After that antpp can be compiled and
+deployed with 'ant deploy'.
+

@@ -8,6 +8,8 @@ PreProcessor). Antpp is a collection of ant tasks.
 Usage
 =====
 
+Copy antpp-bin.jar into the lib directory of Ant.
+
 It is necessary to define the tasks at the beginning of the build.xml
 file:
 
@@ -21,9 +23,11 @@ Calls the preprocessor for a specified file, or for all the *.x* files
 in a directory. It ignores files with the following patterns: *~, .#*,
 *.xml
 
+It replaces the '.x' part of the name with '.' 
+For example: Main.xjava -> Main.java
+
 It creates read-only files (if the extension is not jad), because
 modifying the generated files by hand is not a good idea.
-
 
 Parameters
 ----------
