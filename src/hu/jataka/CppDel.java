@@ -25,7 +25,9 @@ public final class CppDel extends Task {
             } else {
                 File file = new File(Cpp.convertName(files[i].getAbsolutePath()));
                 if( file.exists() ) {
-                    log("Deleting: "+file.getAbsolutePath());
+                    // NPE for log dunno why                    
+                    // log("Deleting: "+file.getAbsolutePath());
+                    System.out.println("Deleting: "+file.getAbsolutePath());
                     file.delete();
                 }
             }

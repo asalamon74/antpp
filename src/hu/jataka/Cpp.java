@@ -63,15 +63,41 @@ public final class Cpp extends Task {
  
                 }
                 Process p = Runtime.getRuntime().exec("cpp "+params+mFile.getAbsolutePath()+" "+mFile2 );
+                BufferedReader breader = new BufferedReader(new InputStreamReader(p.getErrorStream()));
                 p.waitFor();
                 if( p.exitValue() != 0 ) {
-                    System.out.println("xx");
-                    throw new BuildException("cpp exitvalue: "+p.exitValue());
+                    String err="";
+                    while( breader.ready() ) {
+                        String line = breader.readLine();
+                        System.err.println(line);
+                        err += line;                        
+                    }
+                    throw new BuildException("cpp error "+err);
                 }
-                Chmod chmod = new Chmod();
-                chmod.setFile(mFile2);
-                chmod.setPerm("g-w");
-                //                chmod.execute();
+                // It's not working
+//                 Chmod chmod = new Chmod();
+//                 chmod.setFile(mFile2);
+//                 chmod.setPerm("g-w");
+//                 chmod.execute();
+
+                if( !mFile2Name.endsWith(".jad") ) {
+                    // ugly hack
+                    // will be removed after using antenna
+                    String []cmd = new String[3];
+                    cmd[0] = "/bin/chmod";
+                    cmd[1] = "a-w";
+                    cmd[2] = mFile2.getAbsolutePath();
+                    try {
+                        Process chmodProc = Runtime.getRuntime().exec(cmd);
+                        chmodProc.waitFor();
+                        if( chmodProc.exitValue() != 0 ) {
+                            throw new IOException();
+                        }
+                    } catch( IOException e ) {
+                        // Only Warning
+                        System.out.println("Chmod unsuccessfull");
+                    }
+                }
             } catch( Exception e ) {
                 throw new BuildException(e);
             }
@@ -79,14 +105,11 @@ public final class Cpp extends Task {
             //        log("x"+mFile);
             File files[] = mDir.listFiles(new XFilesFilter());
             for( int i=0; i<files.length; ++i ) {
-                //            log("cppdir"+files[i]);
                 if( files[i].isDirectory() ) {
-                    //                log("dir");
                     Cpp cpp = new Cpp();
                     cpp.setDir(new File(files[i].getAbsolutePath()));
                     cpp.execute();
                 } else {
-                    //                                log("file");
                     Cpp cpp = new Cpp();
                     cpp.setFile(new File(files[i].getAbsolutePath()));
                     cpp.execute();

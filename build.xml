@@ -23,6 +23,7 @@
 	            <include name="doc/**"/>
 	            <include name="LICENSE"/>
 	            <include name="build.xml"/>
+	            <include name=".ant.properties"/>
 	            <include name="Changelog"/>
 	            <include name="TODO"/>
 	        </fileset>
