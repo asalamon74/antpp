@@ -2,5 +2,6 @@
 
 -Remove ugly chmod jad hack
 
--Create a README file
+-Replace macros parameter with <macro> items?
 
+-Allow to configure the source/destination file pattern?

@@ -1,7 +1,9 @@
-0.67.00 ??
+0.67.00 2003-FEB-15
 
 -Eliminating .ant.properties
 -Default ant task is package, not all (clean+deploy)
+-Moved source files into the correct subdirectory
+-README file added
 
 0.66.00 2003-FEB-13
 
