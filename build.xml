@@ -29,6 +29,8 @@
 	            <include name="Changelog"/>
 	            <include name="VERSION"/>
 	            <include name="TODO"/>
+	            <include name="README"/>
+	            <include name="INSTALL"/>
 	        </fileset>
 	        
 	    </zip>
