@@ -1,27 +1,25 @@
 <project name="antpp" default="all" basedir=".">
 
-        <property file=".ant.properties"/>
-
         <!-- Using the following environmental variables -->
         <!-- ANT_HOME -->
         <property environment="env"/>
 
 	<target name="init">
-	    <mkdir dir="${classes}"/>
+	    <mkdir dir="classes"/>
 	</target>
 	
 	<target name="compile" depends="init">
-	    <javac srcdir="src" destdir="${classes}" classpath="${env.ANT_HOME}/lib/ant.jar"/>
+	    <javac srcdir="src" destdir="classes" classpath="${env.ANT_HOME}/lib/ant.jar"/>
 	</target>
 	
 	<target name="package" depends="compile">
-	    <jar jarfile="${project}-bin.jar">
-	        <fileset dir="${classes}">
+	    <jar jarfile="${ant.project.name}-bin.jar">
+	        <fileset dir="classes">
 	            <include name="**/*.class"/>
 	        </fileset>
 	    </jar>
 	    
-	    <zip zipfile="${project}-src.zip">
+	    <zip zipfile="${ant.project.name}-src.zip">
 	        <fileset dir=".">
 	            <include name="src/**/*.java"/>
 	            <include name="doc/**"/>
@@ -37,13 +35,13 @@
 	</target>
 	
 	<target name="deploy" depends="package">
-	    <copy file="${project}-bin.jar" todir="${env.ANT_HOME}/lib"/>
+	    <copy file="${ant.project.name}-bin.jar" todir="${env.ANT_HOME}/lib"/>
 	</target>
 	
 	<target name="clean">
-	    <delete dir="${classes}" failonerror="false"/>
-	    <delete file="${project}-bin.jar" failonerror="false"/>
-	    <delete file="${project}-src.zip" failonerror="false"/>
+	    <delete dir="classes" failonerror="false"/>
+	    <delete file="${ant.project.name}-bin.jar" failonerror="false"/>
+	    <delete file="${ant.project.name}-src.zip" failonerror="false"/>
 	</target>
 
     <target name="all" depends="clean,deploy"/>

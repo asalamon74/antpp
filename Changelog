@@ -1,3 +1,7 @@
+0.67.00 ??
+
+-Eliminating .ant.properties
+
 0.66.00 2003-FEB-13
 
 -Macros work with recursive cpp
