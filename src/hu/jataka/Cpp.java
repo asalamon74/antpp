@@ -35,7 +35,7 @@ public final class Cpp extends Task {
     public static String convertName(String name) {
         StringBuffer ret = new StringBuffer(name);
         int rindex;
-        while( (rindex = ret.indexOf(".x")) != -1 ) {
+        while( (rindex = ret.toString().indexOf(".x")) != -1 ) {
             ret.replace(rindex,rindex+2,".");
         }
         return new String(ret);
