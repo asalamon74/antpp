@@ -1,3 +1,10 @@
+0.66.00 2003-FEB-13
+
+-Macros work with recursive cpp
+-Correct logging
+-cppdel's dir attribute is mandatory
+-VERSION file added
+
 0.65.00 2003-FEB-09
 
 -Using envoronmental variables

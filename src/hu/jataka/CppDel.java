@@ -15,22 +15,26 @@ public final class CppDel extends Task {
         mDir = dir; 
     }
 
-    public void execute() throws BuildException {        
-        File files[] = mDir.listFiles(new Cpp.XFilesFilter());
+    private void real_execute(File dir) {
+        File files[] = dir.listFiles(new Cpp.XFilesFilter());
         for( int i=0; i<files.length; ++i ) {
             if( files[i].isDirectory() ) {
-                CppDel cd = new CppDel();
-                cd.setDir(new File(files[i].getAbsolutePath()));
-                cd.execute();
+                log("Checking "+files[i]+" directory", Project.MSG_VERBOSE);
+                real_execute(new File(files[i].getAbsolutePath()));
             } else {
                 File file = new File(Cpp.convertName(files[i].getAbsolutePath()));
                 if( file.exists() ) {
-                    // NPE for log dunno why                    
-                    // log("Deleting: "+file.getAbsolutePath());
-                    System.out.println("Deleting: "+file.getAbsolutePath());
+                    log("Deleting: "+file.getAbsolutePath());
                     file.delete();
                 }
             }
         }
+    }
+
+    public void execute() throws BuildException {
+        if( mDir == null) {
+            throw new BuildException("Please specify dir");
+        }
+        real_execute(mDir);
     }
 }

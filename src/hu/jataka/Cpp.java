@@ -41,15 +41,11 @@ public final class Cpp extends Task {
         return new String(ret);
     }
 
-    public void execute() throws BuildException {
-        if( (mFile == null && mDir == null) || 
-            (mFile != null && mDir != null)) {
-            throw new BuildException("Please specify file or dir (only one of them)");
-        }
-        if( mFile != null ) {
-            String mFile2Name = convertName(mFile.getName());
-            File mFile2 = new File(mFile.getParent(),mFile2Name);
-            if( mFile.lastModified() < mFile2.lastModified() ) {
+    private void real_execute(File file, File dir, String macros) throws BuildException {
+        if( file != null ) {
+            String mFile2Name = convertName(file.getName());
+            File mFile2 = new File(file.getParent(),mFile2Name);
+            if( file.lastModified() < mFile2.lastModified() ) {
                 return;
             }
             
@@ -59,7 +55,7 @@ public final class Cpp extends Task {
                 mFile2.delete();
             }
                 
-            System.out.println("Preprocessing "+mFile.getName());
+            log("Preprocessing "+file.getName());
             try {
                 String params = "-C -P ";
                 if( macros != null ) {
@@ -69,14 +65,15 @@ public final class Cpp extends Task {
                     }
  
                 }
-                Process p = Runtime.getRuntime().exec("cpp "+params+mFile.getAbsolutePath()+" "+mFile2 );
+                log("Executing "+"cpp "+params+file.getAbsolutePath()+" "+mFile2, Project.MSG_VERBOSE);
+                Process p = Runtime.getRuntime().exec("cpp "+params+file.getAbsolutePath()+" "+mFile2 );
                 BufferedReader breader = new BufferedReader(new InputStreamReader(p.getErrorStream()));
                 p.waitFor();
                 if( p.exitValue() != 0 ) {
                     String err="";
                     while( breader.ready() ) {
                         String line = breader.readLine();
-                        System.err.println(line);
+                        log(line, Project.MSG_ERR);
                         err += line;                        
                     }
                     throw new BuildException("cpp error "+err);
@@ -102,26 +99,29 @@ public final class Cpp extends Task {
                         }
                     } catch( IOException e ) {
                         // Only Warning
-                        System.out.println("Chmod unsuccessfull");
+                        log("Chmod unsuccessfull", Project.MSG_WARN);
                     }
                 }
             } catch( Exception e ) {
                 throw new BuildException(e);
             }
         } else {
-            //        log("x"+mFile);
-            File files[] = mDir.listFiles(new XFilesFilter());
+            File files[] = dir.listFiles(new XFilesFilter());
             for( int i=0; i<files.length; ++i ) {
                 if( files[i].isDirectory() ) {
-                    Cpp cpp = new Cpp();
-                    cpp.setDir(new File(files[i].getAbsolutePath()));
-                    cpp.execute();
+                    real_execute(null, new File(files[i].getAbsolutePath()), macros);
                 } else {
-                    Cpp cpp = new Cpp();
-                    cpp.setFile(new File(files[i].getAbsolutePath()));
-                    cpp.execute();
+                    real_execute(new File(files[i].getAbsolutePath()), null, macros);
                 }
             }
+        }        
+    }
+
+    public void execute() throws BuildException {
+        if( (mFile == null && mDir == null) || 
+            (mFile != null && mDir != null)) {
+            throw new BuildException("Please specify file or dir (only one of them)");
         }
+        real_execute(mFile, mDir, macros);
     }
 }

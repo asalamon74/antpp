@@ -2,7 +2,5 @@
 
 -Remove ugly chmod jad hack
 
--Use log instead of System.out.println (Currently I've got NPE)
-
 -Create a README file
 
