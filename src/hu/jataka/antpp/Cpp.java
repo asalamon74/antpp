@@ -124,29 +124,16 @@ public final class Cpp extends Task {
                     }
                     throw new BuildException("cpp error "+err);
                 }
-                // It's not working
-//                 Chmod chmod = new Chmod();
-//                 chmod.setFile(mFile2);
-//                 chmod.setPerm("g-w");
-//                 chmod.execute();
 
                 if( !mFile2Name.endsWith(".jad") ) {
                     // ugly hack
                     // will be removed after using antenna
-                    String []cmd = new String[3];
-                    cmd[0] = "/bin/chmod";
-                    cmd[1] = "a-w";
-                    cmd[2] = mFile2.getAbsolutePath();
-                    try {
-                        Process chmodProc = Runtime.getRuntime().exec(cmd);
-                        chmodProc.waitFor();
-                        if( chmodProc.exitValue() != 0 ) {
-                            throw new IOException();
-                        }
-                    } catch( IOException e ) {
-                        // Only Warning
-                        log("Chmod unsuccessful", Project.MSG_WARN);
-                    }
+		    Chmod chmod = new Chmod();
+		    chmod.setProject(project);
+		    chmod.setTaskName(getTaskName());
+		    chmod.setFile(mFile2);
+		    chmod.setPerm("a-w");
+		    chmod.execute();
                 }
             } catch( Exception e ) {
                 throw new BuildException(e);

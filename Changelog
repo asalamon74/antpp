@@ -1,3 +1,11 @@
+0.72.00 2004-FEB-??
+
+-Chmod hack corrected
+
+0.71.01 2003-JUL-29
+
+-Packaging error corrected.
+
 0.71.00 2003-JUL-23
 
 -<macro> tag
@@ -32,7 +40,7 @@
 
 0.65.00 2003-FEB-09
 
--Using envoronmental variables
+-Using environmental variables
 -Bugfix: Deleting generated file before calling cpp
 
 0.64.00 2003-FEB-08
