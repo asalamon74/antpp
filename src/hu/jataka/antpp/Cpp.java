@@ -69,9 +69,13 @@ public final class Cpp extends Task {
                     while (stoken.hasMoreTokens()) {
                         StringBuffer token = new StringBuffer(stoken.nextToken());
                         int eqpos = token.toString().indexOf("=");
-                        String name = token.substring(0,eqpos);
-                        String value = token.substring(eqpos+1);
-                        writer.println("#define "+name+" "+value);
+                        if( eqpos != -1 ) {
+                            String name = token.substring(0,eqpos);
+                            String value = token.substring(eqpos+1);
+                            writer.println("#define "+name+" "+value);
+                        } else {
+                            writer.println("#define "+token);
+                        }
                     }
                     writer.flush();
                     writer.close();
