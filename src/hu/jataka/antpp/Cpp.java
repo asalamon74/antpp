@@ -25,6 +25,12 @@ public final class Cpp extends Task {
         this.macros = macros;
     }
 
+    private Vector macrosVector = new Vector();
+
+    public void addMacro(Macro macro) {
+        macrosVector.add(macro);
+    }
+
     public static class XFilesFilter implements FileFilter {
         public boolean accept(File pathname) {
             return (pathname.isDirectory() || pathname.getName().indexOf(".x") != -1)
@@ -60,7 +66,29 @@ public final class Cpp extends Task {
             log("Preprocessing "+file.getName());
             try {
                 String params = "-C -P ";
-                if( macros != null ) {
+                if( macros == null )  {
+                    // macros is null, we have to create the macros string
+                    // using the nested <macro> statements
+                    // TODO: change it: convert the string format to the nested one.
+                    macros = "";
+                    int macroNum = macrosVector.size();
+                    for( int macroIndex = 0; macroIndex < macroNum; ++macroIndex ) {
+                        Macro m = (Macro)macrosVector.elementAt(macroIndex);
+                        if( m.ifExpression != null ) {
+                            if( getProject().getProperty(m.ifExpression) == null ) {
+                                // skip this macro
+                                continue;
+                            }
+                        }                        
+                        if( m.value == null ) {
+                            macros += m.name+",";
+                        } else {
+                            macros += m.name+"="+m.value+",";
+                        }
+                    }
+                    macros = macros.substring(0,macros.length()-1);
+                }
+                if( macros != null && !macros.equals("") ) {
                     params += "-imacros imacros.h ";
                     // creating imacros.h file
                     File imacrosFile = new File("imacros.h");
@@ -143,3 +171,4 @@ public final class Cpp extends Task {
         real_execute(mFile, mDir, macros);
     }
 }
+
