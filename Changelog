@@ -1,6 +1,7 @@
 0.67.00 ??
 
 -Eliminating .ant.properties
+-Default ant task is package, not all (clean+deploy)
 
 0.66.00 2003-FEB-13
 

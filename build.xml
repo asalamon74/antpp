@@ -1,4 +1,4 @@
-<project name="antpp" default="all" basedir=".">
+<project name="antpp" default="package" basedir=".">
 
         <!-- Using the following environmental variables -->
         <!-- ANT_HOME -->
