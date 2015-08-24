@@ -1,0 +1,87 @@
+body {
+  background-color: #dbf3ff;
+}
+table.company {
+  width: 	100%;
+}
+td.companyname {
+  font-weight:  bold;
+  font-size:	120%;
+  color:	#004171;
+}
+td.companyflag {
+  text-align: right;
+}
+.page-contents {
+  margin-left:	5%;
+  margin-right:	10%;
+  font-family: Times, serif;
+}
+table.menu {
+  background-color: #004171;
+  font-family: Helvetica, serif;
+  font-color:		#dbf3ff;
+  width: 	100%;
+  border-spacing:   0;
+  border-style:	none;
+}
+table.midlet {
+  background-color: #eeeebb;
+  font-family: serif;
+  font-color:		#000000;
+  border-spacing:   0;
+  border-style:	none;
+}
+tr.midlethead {
+  background-color: #8888ff;
+  font-size: 120%;
+  font-weight: bold;
+}
+tr.midletdownload {
+  font-size: 80%;
+  background-color: #ddddff;
+}
+td.midletinfo {
+  font-family: sans-serif;
+}
+table.points {
+  background-color: #ddddff;
+  margin-left:	15%;
+  border-spacing:   0;
+}
+thead.pointshead {
+  border-spacing:   0;
+  background-color: #8888ff;
+  font-size: 120%;
+}
+a.menu:link {
+ font-weight:  normal;       
+ color: #dbf3ff;
+ text-decoration:none;
+}
+a.menu:visited {
+ font-weight:  normal;       
+ color: #dbf3ff;
+ text-decoration:none;
+}
+a:link {
+ font-weight:  bold;       
+ text-decoration:none;
+}
+a:visited {
+ font-weight:  bold;
+ text-decoration:none;
+}
+.td-active {
+  background-color:	#a8def7;
+}
+hr {
+  background-color:	#004171;	
+}
+table.source {
+  background-color: #eeeedd;
+  font-family: serif;
+  font-color:		#000000;
+  border-spacing:   0;
+  border-style:	none;
+}
