@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/asalamon74/antpp.svg?branch=master)](https://travis-ci.org/asalamon74/antpp)
+[![Build Status](https://travis-ci.com/asalamon74/antpp.svg?branch=master)](https://travis-ci.com/asalamon74/antpp)
 
 **_This is an obsolete project_**
 
